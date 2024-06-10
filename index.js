@@ -26,7 +26,7 @@ const botConfig = {
   username: 'RiseSMPUptimeBOt',
   port: 46779,
   plugins: [AutoAuth],
-  AutoAuth: 'RiseSMPBOT010624'
+  AutoAuth: 'RiseSMPBOT01062024'
 };
 
 // Create bot function
