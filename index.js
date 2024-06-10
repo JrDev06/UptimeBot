@@ -12,7 +12,7 @@ const app = express();
 app.use(express.json());
 
 app.get("/", (_, res) => res.sendFile(__dirname + "/index.html"));
-app.listen(process.env.PORT);
+app.listen(process.env.PORT || 3000); // Add a default port
 
 setInterval(() => {
   http.get(`https://uptimebot-t4z5.onrender.com`);
@@ -116,9 +116,19 @@ function createBot() {
     }
   });
 
-  bot.on('kicked', console.log);
-  bot.on('error', console.log);
-  bot.on('end', createBot);
+  bot.on('kicked', () => {
+    console.log('Kicked from server. Reconnecting...');
+    createBot(); // Restart the bot when kicked
+  });
+
+  bot.on('error', (err) => {
+    console.log('Error:', err);
+  });
+
+  bot.on('end', () => {
+    console.log('Bot disconnected. Reconnecting...');
+    createBot(); // Restart the bot when disconnected
+  });
 }
 
 createBot();
