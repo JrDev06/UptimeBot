@@ -23,7 +23,7 @@ app.get('/ping', (_, res) => {
 const botConfig = {
   host: 'RiseSMPMC.aternos.me',
   version: false, // Replace with a specific version, e.g., '1.16.5'
-  username: 'RiseSMPUptimeBOT',
+  username: 'RiseSMPUptimeBOt',
   port: 46779,
   plugins: [AutoAuth],
   AutoAuth: 'bot112022'
