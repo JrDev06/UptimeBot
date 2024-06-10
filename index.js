@@ -15,7 +15,7 @@ app.get("/", (_, res) => res.sendFile(__dirname + "/index.html"));
 app.listen(process.env.PORT);
 
 setInterval(() => {
-  http.get(`http://${process.env.PROJECT_DOMAIN}.repl.co/`);
+  http.get(`https://uptimebot-t4z5.onrender.com`);
 }, 224000);
 
 
