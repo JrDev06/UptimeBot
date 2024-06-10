@@ -14,9 +14,10 @@ app.use(express.json());
 app.get("/", (_, res) => res.sendFile(__dirname + "/index.html"));
 app.listen(process.env.PORT || 3000); // Add a default port
 
-setInterval(() => {
-  http.get(`https://uptimebot-t4z5.onrender.com`);
-}, 224000);
+// Uptime robot ping
+app.get('/ping', (_, res) => {
+  res.send('Pong!');
+});
 
 // Bot configuration
 const botConfig = {
@@ -38,7 +39,7 @@ function createBot() {
 
   // Event listeners
   bot.on('playerCollect', (collector, itemDrop) => {
-    if (collector !== bot.entity) return;
+    if (collector!== bot.entity) return;
 
     setTimeout(() => {
       const sword = bot.inventory.items().find(item => item.name.includes('sword'));
@@ -47,7 +48,7 @@ function createBot() {
   });
 
   bot.on('playerCollect', (collector, itemDrop) => {
-    if (collector !== bot.entity) return;
+    if (collector!== bot.entity) return;
 
     setTimeout(() => {
       const shield = bot.inventory.items().find(item => item.name.includes('shield'));
@@ -93,8 +94,8 @@ function createBot() {
 
   bot.on('physicTick', () => {
     if (!guardPos) return;
-    const filter = e => e.type === 'mob' && e.position.distanceTo(bot.entity.position) < 16 &&
-                      e.mobType !== 'Armor Stand';
+    const filter = e => e.type === 'ob' && e.position.distanceTo(bot.entity.position) < 16 &&
+                      e.mobType!== 'Armor Stand';
     const entity = bot.nearestEntity(filter);
     if (entity) {
       bot.pvp.attack(entity);
@@ -110,7 +111,7 @@ function createBot() {
         guardArea(player.entity.position);
       }
     }
-    if (message === 'stop') {
+    if (message === 'top') {
       bot.chat('I will stop!');
       stopGuarding();
     }
